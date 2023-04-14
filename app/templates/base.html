@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }} - TFord Photo</title>
+        {% else %}
+        <title>Welcome to TFord Photo</title>
+        {% endif %}
+    </head>
+    <body>
+        <div>TFord Photo: <a href="/index">Home</a></div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
