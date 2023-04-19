@@ -71,3 +71,11 @@ def shootform():
         flash('Shoot information saved successfully.')
         return redirect(url_for('index'))
     return render_template('shootform.html', title='Shoot Information Form', form=form)
+
+@app.route('/clientinfo')
+def clientinfo():
+    return render_template('clientinfo.html', title='Client Information')
+
+@app.route('/shootinfo')
+def shootinfo():
+    return render_template('shootinfo.html', title='Shoot Information')

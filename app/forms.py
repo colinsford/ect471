@@ -49,9 +49,19 @@ class ShootForm(FlaskForm):
     num_photos_requested = IntegerField('Number of Photos Requested')
     model_release = StringField('Model Release?')
     branding = StringField('Link to Branding / Graphics')
-    
-    def edit_client(request, id):
-        client = Client.query.get(id)
-        form = ShootForm(request.POST, obj=client)
-        form.client_id.choices = [(c.id, c.first_name, c.last_name) for c in Client.query.order_by('name')]
+    submit = SubmitField('Submit')
+
+    def __init__(self, *args, **kwargs):
+        super(ShootForm, self).__init__(*args, **kwargs)
+        self.client_id.choices = [(c.id, f'{c.first_name} {c.last_name}') for c in Client.query.order_by(Client.last_name, Client.first_name)]
+
+    def validate_client_id(self, client_id):
+        client = Client.query.get(client_id.data)
+        if client is None:
+            raise ValidationError('Not a valid choice.')
+
+def edit_client(request, id):
+    client = Client.query.get(id)
+    form = ShootForm(request.POST, obj=client)
+    form.client_id.choices = [(c.id, f'{c.first_name} {c.last_name}') for c in Client.query.order_by(Client.last_name, Client.first_name)]
 

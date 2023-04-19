@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Enter Shoot Information</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.locations.label }} <br>
+            {{ form.locations(size=240) }} <br>
+            {% for error in form.locations.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.client_id.label }} <br>
+            {{ form.client_id }} <br>
+            {% for error in form.client_id.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.time.label }} <br>
+            {{ form.time(size=32) }} <br>
+            {% for error in form.time.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.prompt.label }} <br>
+            {{ form.prompt(size=240) }} <br>
+            {% for error in form.prompt.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.equipment.label }} <br>
+            {{ form.equipment(size=240) }} <br>
+            {% for error in form.equipment.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.num_photos_requested.label }} <br>
+            {{ form.num_photos_requested }} <br>
+            {% for error in form.num_photos_requested.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.model_release.label }} <br>
+            {{ form.model_release(size=32) }} <br>
+            {% for error in form.model_release.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.branding.label }} <br>
+            {{ form.branding(size=32) }} <br>
+            {% for error in form.branding.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}
