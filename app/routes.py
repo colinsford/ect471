@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, ClientForm, ShootInfo
+from app.forms import LoginForm, RegistrationForm, ClientForm, ShootForm
 from flask_login import current_user, login_user, login_required
 from app.models import User, Client, MailingAddress, Shoot
 from flask_login import logout_user
@@ -62,4 +62,12 @@ def clientform():
     return render_template('clientform.html', title='Client Information', form=form)
 
 @app.route('/shootform', methods=['GET', 'POST'])
-def shoot
+def shootform():
+    form = ShootForm()
+    if form.validate_on_submit():
+        shoot = Shoot(locations=form.locations.data, client_id=form.client_id.data, time=form.time.data,prompt=form.prompt.data, equipment=form.equipment.data, num_photos_requested=form.num_photos_requested.data, model_release=form.model_release.data, branding=form.branding.data)
+        db.session.add(shoot)
+        db.session.commit()
+        flash('Shoot information saved successfully.')
+        return redirect(url_for('index'))
+    return render_template('shootform.html', title='Shoot Information Form', form=form)
