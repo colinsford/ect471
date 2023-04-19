@@ -40,7 +40,7 @@ class ClientForm(FlaskForm):
     country = StringField('Country')
     submit = SubmitField('Submit')
 
-class ShootInfo(FlaskForm):
+class ShootForm(FlaskForm):
     locations = StringField('Location')
     client_id = SelectField(u'Client', coerce=int)
     time = StringField('Time/Date')
@@ -52,6 +52,6 @@ class ShootInfo(FlaskForm):
     
     def edit_client(request, id):
         client = Client.query.get(id)
-        form = ShootInfo(request.POST, obj=client)
+        form = ShootForm(request.POST, obj=client)
         form.client_id.choices = [(c.id, c.first_name, c.last_name) for c in Client.query.order_by('name')]
 
