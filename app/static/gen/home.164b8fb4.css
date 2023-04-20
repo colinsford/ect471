@@ -1,0 +1,13 @@
+body {
+  padding: 0;
+  margin: 0; }
+
+.form_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.info_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
