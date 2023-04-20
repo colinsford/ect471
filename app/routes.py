@@ -72,10 +72,26 @@ def shootform():
         return redirect(url_for('index'))
     return render_template('shootform.html', title='Shoot Information Form', form=form)
 
-@app.route('/clientinfo')
+@app.route('/clientinfo', methods=['GET', 'POST'])
 def clientinfo():
-    return render_template('clientinfo.html', title='Client Information')
+    form = ShootForm()
+    form.client_id.choices = [(c.id, f"{c.first_name} {c.last_name}") for c in Client.query.order_by(Client.first_name)]
+    selected_client = None
 
-@app.route('/shootinfo')
+    if request.method == 'POST':
+        client_id = form.client_id.data
+        selected_client = Client.query.get(client_id)
+
+    return render_template('clientinfo.html', form=form, selected_client=selected_client)
+
+@app.route('/shootinfo', methods=['GET', 'POST'])
 def shootinfo():
-    return render_template('shootinfo.html', title='Shoot Information')
+    form = ShootForm()
+    form.client_id.choices = [(c.id, f"{c.first_name} {c.last_name}") for c in Client.query.order_by(Client.first_name)]
+    shoots = None
+
+    if request.method == 'POST':
+        client_id = form.client_id.data
+        shoots = Shoot.query.filter_by(client_id=client_id).all()
+
+    return render_template('shootinfo.html', form=form, shoots=shoots)
