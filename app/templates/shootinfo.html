@@ -1,45 +1,49 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Shoot Information</h1>
-<form method="POST">
-    {{ form.csrf_token }}
-    
-    <div>
-        <label for="{{ form.client_id.id }}">Select Client:</label>
-        {{ form.client_id }}
-    </div>
-    
-    <button type="submit">Load Shoot Information</button>
-</form>
+<div class="info_wrapper">
+    <div class="info">
+        <h1>Shoot Information</h1>
+        <form method="POST">
+            {{ form.csrf_token }}
+            
+            <div>
+                <label for="{{ form.client_id.id }}">Select Client:</label>
+                {{ form.client_id }}
+            </div>
+            
+            <button type="submit">Load Shoot Information</button>
+        </form>
 
-{% if shoots %}
-<h2>Shoots Information</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Locations</th>
-            <th>Time</th>
-            <th>Prompt</th>
-            <th>Equipment</th>
-            <th>Number of Photos Requested</th>
-            <th>Model Release</th>
-            <th>Branding</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for shoot in shoots %}
-        <tr>
-            <td>{{ shoot.locations }}</td>
-            <td>{{ shoot.time }}</td>
-            <td>{{ shoot.prompt }}</td>
-            <td>{{ shoot.equipment }}</td>
-            <td>{{ shoot.num_photos_requested }}</td>
-            <td>{{ shoot.model_release }}</td>
-            <td>{{ shoot.branding }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% endif %}
+        {% if shoots %}
+        <h2>Shoots Information</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Locations</th>
+                    <th>Time</th>
+                    <th>Prompt</th>
+                    <th>Equipment</th>
+                    <th>Number of Photos Requested</th>
+                    <th>Model Release</th>
+                    <th>Branding</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for shoot in shoots %}
+                <tr>
+                    <td>{{ shoot.locations }}</td>
+                    <td>{{ shoot.time }}</td>
+                    <td>{{ shoot.prompt }}</td>
+                    <td>{{ shoot.equipment }}</td>
+                    <td>{{ shoot.num_photos_requested }}</td>
+                    <td>{{ shoot.model_release }}</td>
+                    <td>{{ shoot.branding }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}

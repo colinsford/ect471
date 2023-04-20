@@ -1,0 +1,22 @@
+.navbar {
+    @include flex-center;
+    background-image: linear-gradient(to bottom right, rgba(0,0,255,1), rgba(0,0,255,0.3));
+    font-family: $font-family_1;
+    color: #ffffff;
+    margin: 0;
+    height: 3rem;
+    padding: 0;
+
+    a {
+        color: inherit;
+        padding: 0 1rem;
+        text-decoration: none;
+    
+        &:link,
+        &:visited,
+        &:hover,
+        &:active {
+          text-decoration: none;
+        }
+    }
+}

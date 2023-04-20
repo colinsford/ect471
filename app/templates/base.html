@@ -4,12 +4,21 @@
         {% block head %}
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="static/styles/style.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
         {% if title %}
         <title>{{ title }} - TFord Photo</title>
         {% else %}
         <title>Welcome to TFord Photo</title>
         {% endif %}
+
+        {% assets "home_css" %}
+            <link rel="stylesheet" href="{{ ASSET_URL }}">
+        {% endassets %}
+
         {% endblock %}
     </head>
     <body>
@@ -26,7 +35,6 @@
             <a href="{{ url_for('shootinfo') }}">Shoot Info</a>
             {% endif %}
         </div>
-        <hr>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
         <ul>

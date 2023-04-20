@@ -1,0 +1,7 @@
+$font-family_1: 'Montserrat', sans-serif;
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
