@@ -4,7 +4,7 @@
 <div class="form_wrapper">
     <div class="form">
         <h1>Enter Shoot Information</h1>
-        <form action="" method="post" id="shoot-form">
+        <form action="" method="post">
             {{ form.hidden_tag() }}
             <p>
                 {{ form.locations.label }} <br>
@@ -35,16 +35,9 @@
                 {% endfor %}
             </p>
             <p>
-                {{ form.camera.label }} <br>
-                {{ form.camera(id='camera-select') }} <br>
-                {% for error in form.camera.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>
-                {{ form.lens.label }} <br>
-                {{ form.lens(id='lens-select') }} <br>
-                {% for error in form.lens.errors %}
+                {{ form.equipment.label }} <br>
+                {{ form.equipment(size=32) }} <br>
+                {% for error in form.equipment.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>
@@ -73,41 +66,4 @@
         </form>
     </div>
 </div>
-
-
-{{ super() }}
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const cameraSelect = document.getElementById('camera-select');
-        const lensSelect = document.getElementById('lens-select');
-        const shootForm = document.getElementById('shoot-form'); 
-
-        cameraSelect.addEventListener('change', function() {
-            const cameraId = cameraSelect.value;
-            console.log('Camera selected:', cameraId);
-
-            if (cameraId === '') {
-                lensSelect.innerHTML = '';
-                return;
-            }
-
-            fetch('/lenses/' + cameraId)
-                .then(response => {
-                    console.log('Response:', response);
-                    return response.json();
-                })
-                .then(lenses => {
-                    console.log('Lenses:', lenses);
-                    lensSelect.innerHTML = '';
-
-                    lenses.forEach(lens => {
-                        const option = document.createElement('option');
-                        option.value = lens.id;
-                        option.text = lens.label;
-                        lensSelect.add(option);
-                    });
-                });
-        });
-    });
-</script>
 {% endblock %}

@@ -1,6 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Hi, {{ current_user.username }}!</h1>
-
+<div class="info_wrapper">
+    <div class="info">
+        <h1>Welcome, {{ current_user.username }}!</h1>
+        <h1>My Cameras and Lenses</h1>
+        <ul>
+        {% for camera in cameras %}
+        <li>{{ camera.brand }} {{ camera.model }}
+            <ul>
+            {% for lens in camera.lens %}
+            <li>{{ lens.brand }} {{ lens.model }}</li>
+            {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
 {% endblock %}

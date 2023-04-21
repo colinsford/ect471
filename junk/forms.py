@@ -44,9 +44,6 @@ class ClientForm(FlaskForm):
 def available_cameras():
     return Camera.query.all()
 
-def always_true(form, field):
-    return True
-
 class ShootForm(FlaskForm):
     locations = StringField('Location')
     client_id = SelectField(u'Client', coerce=int)
@@ -59,20 +56,20 @@ class ShootForm(FlaskForm):
     branding = StringField('Link to Branding / Graphics')
     submit = SubmitField('Submit')
 
-    def __init__(self, camera_id=None, lens_id=None, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super(ShootForm, self).__init__(*args, **kwargs)
         self.client_id.choices = [(c.id, f'{c.first_name} {c.last_name}') for c in Client.query.order_by(Client.last_name, Client.first_name)]
-        if camera_id:
-            self.camera.data = Camera.query.get(camera_id)
-            self.lens.query_factory = lambda: Lens.query.filter_by(camera_id=camera_id).all()
-        if lens_id:
-            self.lens.data = Lens.query.get(lens_id)
 
     def validate_client_id(self, client_id):
         client = Client.query.get(client_id.data)
         if client is None:
             raise ValidationError('Not a valid choice.')
-
+        
+    def validate(self):
+        # Remove validation for the lens field
+        del self.lens.validators[:]
+        # Run the default validation process
+        return super(ShootForm, self).validate()
 
 def available_cameras():
     return Camera.query.all()

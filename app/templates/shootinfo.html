@@ -23,7 +23,8 @@
                     <th>Locations</th>
                     <th>Time</th>
                     <th>Prompt</th>
-                    <th>Equipment</th>
+                    <th>Camera</th>
+                    <th>Lens</th>
                     <th>Number of Photos Requested</th>
                     <th>Model Release</th>
                     <th>Branding</th>
@@ -35,7 +36,8 @@
                     <td>{{ shoot.locations }}</td>
                     <td>{{ shoot.time }}</td>
                     <td>{{ shoot.prompt }}</td>
-                    <td>{{ shoot.equipment }}</td>
+                    <td>{{ shoot.photoshoot_camera.brand }} {{ shoot.photoshoot_camera.model }}</td>
+                    <td>{{ shoot.photoshoot_lens.brand }} {{ shoot.photoshoot_lens.model }}</td>
                     <td>{{ shoot.num_photos_requested }}</td>
                     <td>{{ shoot.model_release }}</td>
                     <td>{{ shoot.branding }}</td>

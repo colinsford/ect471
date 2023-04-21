@@ -4,7 +4,7 @@
 <div class="form_wrapper">
     <div class="form">
         <h1>Enter Shoot Information</h1>
-        <form action="" method="post" id="shoot-form">
+        <form action="" method="post">
             {{ form.hidden_tag() }}
             <p>
                 {{ form.locations.label }} <br>
@@ -78,35 +78,34 @@
 {{ super() }}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const cameraSelect = document.getElementById('camera-select');
-        const lensSelect = document.getElementById('lens-select');
-        const shootForm = document.getElementById('shoot-form'); 
+    const cameraSelect = document.getElementById('camera-select');
+    const lensSelect = document.getElementById('lens-select');
+    
+    cameraSelect.addEventListener('change', function() {
+        const cameraId = cameraSelect.value;
+        console.log('Camera selected:', cameraId);  // Add this line
 
-        cameraSelect.addEventListener('change', function() {
-            const cameraId = cameraSelect.value;
-            console.log('Camera selected:', cameraId);
-
-            if (cameraId === '') {
+        if (cameraId === '') {
+            lensSelect.innerHTML = '';
+            return;
+        }
+    
+        fetch('/lenses/' + cameraId)
+            .then(response => {
+                console.log('Response:', response);  // Add this line
+                return response.json();
+            })
+            .then(lenses => {
+                console.log('Lenses:', lenses);  // Add this line
                 lensSelect.innerHTML = '';
-                return;
-            }
-
-            fetch('/lenses/' + cameraId)
-                .then(response => {
-                    console.log('Response:', response);
-                    return response.json();
-                })
-                .then(lenses => {
-                    console.log('Lenses:', lenses);
-                    lensSelect.innerHTML = '';
-
-                    lenses.forEach(lens => {
-                        const option = document.createElement('option');
-                        option.value = lens.id;
-                        option.text = lens.label;
-                        lensSelect.add(option);
-                    });
+    
+                lenses.forEach(lens => {
+                    const option = document.createElement('option');
+                    option.value = lens.id;
+                    option.text = lens.label;
+                    lensSelect.add(option);
                 });
+            });
         });
     });
 </script>

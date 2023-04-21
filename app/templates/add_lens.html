@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Add Lens</h1>
+  <form method="post" action="">
+    {{ form.csrf_token }}
+    {{ form.brand.label }}: {{ form.brand }}
+    {{ form.model.label }}: {{ form.model }}
+    {{ form.camera.label }}: {{ form.camera }}
+    {{ form.submit }}
+  </form>
+{% endblock %}

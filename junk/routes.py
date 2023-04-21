@@ -64,19 +64,14 @@ def clientform():
 
 @app.route('/shootform', methods=['GET', 'POST'])
 def shootform():
-    camera_id = request.form.get('camera')
-    lens_id = request.form.get('lens')
-    form = ShootForm(camera_id=camera_id, lens_id=lens_id)
-
+    form = ShootForm()
     if form.validate_on_submit():
-        shoot = Shoot(locations=form.locations.data, client_id=form.client_id.data, time=form.time.data, prompt=form.prompt.data, camera_id=form.camera.data.id, lens_id=form.lens.data.id, num_photos_requested=form.num_photos_requested.data, model_release=form.model_release.data, branding=form.branding.data)
+        shoot = Shoot(locations=form.locations.data, client_id=form.client_id.data, time=form.time.data,prompt=form.prompt.data, equipment=form.equipment.data, num_photos_requested=form.num_photos_requested.data, model_release=form.model_release.data, branding=form.branding.data)
         db.session.add(shoot)
         db.session.commit()
         flash('Shoot information saved successfully.')
         return redirect(url_for('index'))
-
     return render_template('shootform.html', title='Shoot Information Form', form=form)
-
 
 @app.route('/clientinfo', methods=['GET', 'POST'])
 def clientinfo():
