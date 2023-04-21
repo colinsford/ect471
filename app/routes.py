@@ -77,12 +77,14 @@ def clientinfo():
     form = ShootForm()
     form.client_id.choices = [(c.id, f"{c.first_name} {c.last_name}") for c in Client.query.order_by(Client.first_name)]
     selected_client = None
+    client_address = None
 
     if request.method == 'POST':
         client_id = form.client_id.data
         selected_client = Client.query.get(client_id)
+        client_address = MailingAddress.query.get(client_id)
 
-    return render_template('clientinfo.html', form=form, selected_client=selected_client)
+    return render_template('clientinfo.html', form=form, selected_client=selected_client, client_address=client_address)
 
 @app.route('/shootinfo', methods=['GET', 'POST'])
 def shootinfo():

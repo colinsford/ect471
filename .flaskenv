@@ -1,2 +1,1 @@
 FLASK_APP=tfordphoto.py
-FLASK_ENV=development

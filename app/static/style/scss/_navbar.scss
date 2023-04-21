@@ -1,6 +1,6 @@
 .navbar {
     @include flex-center;
-    background-image: linear-gradient(to bottom right, rgba(0,0,255,1), rgba(0,0,255,0.3));
+    background-image: linear-gradient(to bottom right, rgba(40,58,151,0.7), rgba(0,52,98,0.8),rgba(0,52,98,0.4));
     font-family: $font-family_1;
     color: #ffffff;
     margin: 0;
