@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Add Camera</h1>
-  <form method="post" action="">
-    {{ form.csrf_token }}
-    {{ form.brand.label }}: {{ form.brand }}
-    {{ form.model.label }}: {{ form.model }}
-    {{ form.submit }}
-  </form>
+<div class="form_wrapper">
+    <div class="form">
+        <h1>Add Camera</h1>
+        <form method="post" action="">
+            {{ form.csrf_token }}
+            {{ form.brand.label }}: {{ form.brand }}
+            {{ form.model.label }}: {{ form.model }}
+            {{ form.submit }}
+        </form>
+    </div>
+</div>
 {% endblock %}
