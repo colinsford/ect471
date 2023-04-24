@@ -6,3 +6,4 @@ This uses flask-migrate to perform database migrations
     When new tables are added, use (venv) $ flask db migrate -m "table name i.e. 'users table'"
     Then, (venv) $ flask db upgrade
 
+See "requirements.txt" for full list of dependencies
